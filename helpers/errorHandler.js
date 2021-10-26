@@ -1,10 +1,8 @@
 const wrapper = (fn) => async (req, res, next) => {
-  console.log(req);
   try {
     const result = await fn(req, res, next)
     return result
   } catch (error) {
-    console.log(1, error);
     switch (error.name) {
       case 'ValidationError':
         res

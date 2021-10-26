@@ -72,25 +72,19 @@ const login = async (req, res, next) => {
     }
 
 const current = async (req, res, next) => {
-    const token = req.get('Authorization')?.split(' ')[1]
-    if(!token) {
-        return res.status(HttpCode.UNAUTHORIZED).json({
-            code: HttpCode.UNAUTHORIZED,
-            message: 'Not authorized',
-        })
-    }
-
-    const user = await Users.getToken(token)
+    
+    const email = req.user.email
+    const subscription = req.user.subscription
+    
     return res.status(HttpCode.OK).json({
     status: 'success',
     code: HttpCode.OK,
     ResponseBody: {
-        "email": user.email,
-        "subscription": user.subscription
+        "email": email,
+        "subscription": subscription
     },
     })
 }
-
 
 module.exports = {
     signup,
