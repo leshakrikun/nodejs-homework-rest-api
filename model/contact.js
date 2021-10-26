@@ -1,4 +1,6 @@
-const { Schema, model}  = require('mongoose')
+const { Schema, model, SchemaTypes }  = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
+
 
 function toLower(v) {
     return v.toLowerCase();
@@ -24,7 +26,11 @@ const contactSchema = new Schema({
     favorite: {
         type: Boolean,
         default: false,
-      },
+    },
+    owner: {
+        type: SchemaTypes.ObjectId,
+        ref: 'user',
+     }
     },
     { versionKey: false, timestamps: true, toJSON: {virtuals: true, transform: function (doc, ret) {
         delete ret._id
@@ -32,6 +38,14 @@ const contactSchema = new Schema({
     },
 } },
 )
+contactSchema.path('name').validate(function (value) {
+    const re = /[A-Z]\w+/
+    return re.test(String(value))
+  })
+
+
+contactSchema.plugin(mongoosePaginate)
+
 const Contact = model('contact', contactSchema)
 
 module.exports = Contact
