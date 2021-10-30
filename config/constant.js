@@ -4,6 +4,7 @@ const ValidInfoContact = {
 }
 
 const clientMaxBodySize = 10000
+const maxAvatarSize = 2000000
 
 const Subscription = {
     STARTER: 'starter',
@@ -31,4 +32,5 @@ module.exports = {
     Subscription,
     HttpCode,
     clientMaxBodySize,
+    maxAvatarSize,
 }

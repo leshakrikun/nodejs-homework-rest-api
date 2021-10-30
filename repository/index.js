@@ -18,7 +18,7 @@ const listContacts = async (userId, query) => {
     limit,
     offset,
     sort: {
-      ...(sortBy ? { [`${sortBy}`]: 1 } : {}), // { name: 1 }
+      ...(sortBy ? { [`${sortBy}`]: 1 } : {}),
       ...(sortByDesc ? { [`${sortByDesc}`]: -1 } : {}),
     },
     select: filter ? filter.split('|').join(' ') : '',
