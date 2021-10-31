@@ -118,4 +118,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-.env
+uploads
+users-avatars
+tmp
