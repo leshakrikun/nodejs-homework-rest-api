@@ -1,7 +1,6 @@
 const { Schema, model, SchemaTypes }  = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-
 function toLower(v) {
     return v.toLowerCase();
 }

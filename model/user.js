@@ -1,6 +1,6 @@
 const { Schema, model}  = require('mongoose')
 const gravatar = require('gravatar')
-
+const crypto = require('crypto')
 const { Subscription } = require('../config/constant')
 const bcrypt = require ('bcryptjs')
 const SALT_FACTOR = 6
@@ -28,18 +28,20 @@ const userSchema = new Schema({
             values: [Subscription.STARTER, Subscription.PRO, Subscription.BUSINESS],
         },
         default: Subscription.STARTER,
-      },
-      token: {
-          type: String,
-          default: null,
-      },
-      avatarURL:  {
+    },
+    token: {
+        type: String,
+        default: null,
+    },
+    avatarURL:  {
         type: String,
         default: function() {
             return gravatar.url(this.email, {s:'250'}, true)
         },
-      },
-      idUserCloud: {type: String, default: null },
+    },
+        idUserCloud: {type: String, default: null },
+        verify: {type: Boolean, default: false},
+        verificationToken: {type: String, required: true, default: crypto.randomUUID()},
     },
     { versionKey: false, timestamps: true, toJSON: {virtuals: true, transform: function (doc, ret) {
         delete ret._id
