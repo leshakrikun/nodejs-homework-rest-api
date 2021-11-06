@@ -20,8 +20,6 @@ const upload = multer({
     if (file.mimetype.includes('image')) {
       return cb(null, true)
     }
-
-    // Вы можете всегда вернуть ошибку, если что-то пошло не так:
     cb(new CustomError(400, 'Wrong format for avatar'))
   },
 })

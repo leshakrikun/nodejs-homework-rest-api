@@ -11,7 +11,6 @@ const guard = (role) => (req, res, next) => {
       message: FORBIDDEN[req.app.get('lang')],
     })
   }
-
   return next()
 }
 

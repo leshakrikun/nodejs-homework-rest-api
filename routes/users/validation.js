@@ -3,7 +3,6 @@ const { ValidInfoContact } =require('../../config/constant')
 Joi.objectId = require('joi-objectid')(Joi)
 const patternName = /^\w+(?:\s+\w+)*$/
 
-
 const schemaUser = Joi.object({
     name:  Joi.string().min(ValidInfoContact.MIN_LENGHT).max(ValidInfoContact.MAX_LENGHT).pattern(new RegExp(patternName)).required(),
     email: Joi.string().email().required(),
@@ -20,6 +19,14 @@ const validate = async (schema, obj, res, next) => {
         .status(400)
         .json({ status: 'error', code: 400, message: 'Error from Joy or other validation library' })
     }
+}
+
+const schemaMail = Joi.object({
+    email: Joi.string().email().optional(),
+})
+
+module.exports.validateMail = async (req, res, next) => {
+    return await validate(schemaMail, req.body, res, next)
 }
 
 module.exports.validateUser = async (req, res, next) => {

@@ -2,8 +2,8 @@ const rateLimit = require('express-rate-limit')
 const { HttpCode } = require('../config/constant')
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 3, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 3, 
   handler: (req, res, next) => {
     return res.status(HttpCode.TOO_MANY_REQUESTS).json({
       status: 'error',
